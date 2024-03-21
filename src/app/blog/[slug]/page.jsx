@@ -1,18 +1,38 @@
 import Image from "next/image";
 import style from "./SinglePostPage.module.css";
-const SinglePostPage = () => {
+import PostUser from "@/components/postUser/PostUser";
+import { Suspense } from "react";
+// import { getPost } from "@/lib/data";
+
+// fetch data with an api
+const getPost = async (slug) => {
+  const res = await fetch(`http://localhost:3000/api/blog/${slug}`, {
+    next: { revalidate: 3600 },
+  });
+  if (!res) {
+    throw new Error("Something went wrong");
+  }
+  return res.json();
+};
+
+const SinglePostPage = async ({ params }) => {
+  const { slug } = params;
+
+  const post = await getPost(slug);
+  const options = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  };
   return (
     <div className={style.container}>
-      <div className={style.imgContainer}>
-        <Image
-          className={style.img}
-          src="https://images.pexels.com/photos/19404757/pexels-photo-19404757/free-photo-of-person-hiking-in-winter-mountains.jpeg"
-          alt="Image"
-          fill
-        />
-      </div>
+      {post.img && (
+        <div className={style.imgContainer}>
+          <Image className={style.img} src={post.img} alt="Image" fill />
+        </div>
+      )}
       <div className={style.textContainer}>
-        <h1 className={style.title}>Title</h1>
+        <h1 className={style.title}>{post.title}</h1>
         <div className={style.details}>
           <Image
             className={style.avatar}
@@ -21,21 +41,17 @@ const SinglePostPage = () => {
             height={50}
             width={50}
           />
-          <div className={style.detailsText}>
-            <span className={style.authorTitle}>Author</span>
-            <span className={style.author}>Terry jeffwfnwr</span>
-          </div>
+          <Suspense fallback={<div>Loading....</div>}>
+            <PostUser userId={post.userId} />
+          </Suspense>
           <div className={style.detailsText}>
             <span className={style.authorTitle}>Published</span>
-            <span className={style.author}>01.01.2024</span>
+            <span className={style.author}>
+              {new Date(post.createdAt).toLocaleDateString("en-IN", options)}
+            </span>
           </div>
         </div>
-        <div className={style.content}>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem, quos
-          maiores, tenetur voluptate esse debitis, minus explicabo
-          exercitationem doloribus asperiores voluptas? Soluta maxime veritatis
-          recusandae quasi autem quos ea delectus.
-        </div>
+        <div className={style.content}>{post.desc}</div>
       </div>
     </div>
   );

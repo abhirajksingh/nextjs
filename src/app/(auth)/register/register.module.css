@@ -1,0 +1,21 @@
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrappper{
+  width: 500px;
+  background-color: var(--bgSoft);
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 30px;
+  border-radius: 5px;
+}
+
+@media (max-width : 768px) {
+  .wrappper{
+    padding: 50px 30px;
+  }
+}

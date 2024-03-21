@@ -1,0 +1,40 @@
+
+.form{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 30px;
+}
+
+.form input{
+  padding: 15px;
+  background-color: var(--bg);
+  color: var(--textColor);
+  border: none;
+  border-radius: 5px;
+  transition: border ease-in-out 0.4s;
+  outline: none;
+}
+.form input:focus{
+  border: 2px solid blue;
+}
+
+.form button{
+  padding: 15px;
+  cursor: pointer;
+  background-color: var(--btn);
+  color: var(--textColor);
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  transition: border ease-in-out 0.4s;
+
+}
+.form button:hover{
+  border: 2px solid blue;
+}
+
+
+.form span{
+  
+}

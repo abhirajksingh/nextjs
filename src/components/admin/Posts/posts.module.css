@@ -1,0 +1,57 @@
+.postContainer{
+  margin-right: 50px;
+}
+.heading{
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+.post{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.details{
+  display: flex;
+  align-items: center;
+}
+.img{
+  border-radius: 50%;
+  object-fit: cover;
+}
+.details span{
+  padding-left: 15px;
+}
+.form{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 30px;
+}
+
+.form input, .form  textarea{
+  padding: 15px;
+  background-color: var(--bgSoft);
+  color: var(--textColor);
+  border: none;
+  border-radius: 5px;
+}
+.form button{
+  padding: 15px;
+  cursor: pointer;
+  background-color: var(--btn);
+  color: var(--textColor);
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+}
+
+.deletePostButton{
+  background-color: rgb(180, 24, 24);
+  border: 0;
+  color: white;
+  padding: 2px 5px;
+
+  border-radius: 5px;
+}
